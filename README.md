@@ -1,2 +1,2 @@
 # core-py
-platform for the ti* application ecosystem (reference implementation in Python)
+platform for the ti* application ecosystem (reference implementation in Python, using PySide6)

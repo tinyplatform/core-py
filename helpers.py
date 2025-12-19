@@ -11,4 +11,4 @@ def get_userdata_root():
         return '~'
 
 def get_tidata_root():
-    return os.path.join(get_userdata_root(), '.ti')
+    return os.path.join(get_userdata_root(), '.ti') # type: ignore
