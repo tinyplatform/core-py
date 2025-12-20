@@ -35,7 +35,6 @@ class Property(Element):
     @property
     def optional(self) -> bool:
         return self._optional
-    
 
     def __str__(self) -> str:
         return f'{self.__class__.__name__}<{self._value_type.__name__}> {self.name}({repr(self.value)})'
