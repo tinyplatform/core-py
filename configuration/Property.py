@@ -204,4 +204,8 @@ if __name__ == '__main__':
 
     super_group = Group(None, "superGroup")
     group.parent = super_group
+    int_prop.value = 69
+    int_prop.parent = super_group
     print(super_group.serialize())
+
+    print(float_prop.full_path())
