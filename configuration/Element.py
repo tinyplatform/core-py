@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Callable
 
 class ElementInterface:
     def full_path(self) -> str: ...
@@ -7,6 +7,7 @@ class ElementInterface:
 
 class Element(ElementInterface):
     def __init__(self, parent: ElementInterface|None, name: str):
+        self._parent = None
         self.parent = parent
         self.name = name
 
@@ -36,3 +37,16 @@ class Element(ElementInterface):
         if self._parent is None:
             return self._name
         return f'{self._parent.full_path()}/{self._name}'
+    
+    def __str__(self) -> str:
+        return f'{self.__class__.__name__} {self._name}'
+
+    def __repr__(self) -> str:
+        return self.__str__()
+
+class CompositeInterface:
+    def add_child(self, element: Element): ...
+    def has_child(self, element: Element) -> bool: ...
+    def query_children(self, lookup: Callable[[Element], bool]) -> list[Element]: ...
+    def get_from_path(self, path: str) -> Element: ...
+    def remove_child(self, element: Element): ...
