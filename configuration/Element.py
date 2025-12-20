@@ -1,5 +1,5 @@
 class ElementInterface:
-    def full_path(self): ...
+    def full_path(self) -> str: ...
 
 class Element(ElementInterface):
     _parent: ElementInterface|None

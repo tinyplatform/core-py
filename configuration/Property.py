@@ -1,5 +1,6 @@
 from typing import Any
 from Element import Element
+from Group import Group
 
 class Property(Element):
     """Base class for all configuration properties.
@@ -7,7 +8,7 @@ class Property(Element):
     _value: Any
     _value_type = Any
 
-    def __init__(self, parent: Element|None, name: str, value: _value_type|None = None):
+    def __init__(self, parent: Group|None, name: str, value: _value_type|None = None):
         super().__init__(parent, name)
         self.value = value
 
@@ -32,11 +33,21 @@ class Property(Element):
         return f'{self.__class__.__name__}<{self._value_type.__name__}> {self.name}({repr(self.value)})'
 
 class IntProperty(Property):
+    """A configuration property that stores an integer."""
     _value_type = int
     _min: int|None
     _max: int|None
 
-    def __init__(self, parent: Element|None, name: str, value: _value_type|None = None, min: int|None = None, max: int|None = None):
+    def __init__(self, parent: Group|None, name: str, value: _value_type|None = None, min: int|None = None, max: int|None = None):
+        """A configuration property that stores an integer.
+
+        Args:
+            parent (Group | None): the parent group. Must be set to None if it is a top-level property.
+            name (str): the name of the property.
+            value (int | None, optional): the (integer) value of the property. If set to None and the property isn't optional, will be discarded in favour of the default value instead.
+            min (int | None, optional): the minimum value for the integer. Defaults to None.
+            max (int | None, optional): the maximum value for the integer. Defaults to None.
+        """
         self._min = min
         self._max = max
         super().__init__(parent, name, value)
@@ -59,6 +70,8 @@ class IntProperty(Property):
         return True
 
 if __name__ == '__main__':
+    group = Group(None, "propGroup")
+
     prop = Property(None, "myProp")
     print(prop)
 
@@ -74,7 +87,8 @@ if __name__ == '__main__':
     except Exception as e:
         print(e.__class__.__name__, e)
 
-    print(Property(prop, "lambda"))
+    print(Property(group, "lambda1"))
+    print(Property(group, "lambda2").full_path())
 
     int_prop = IntProperty(None, "intProp", 879, min=0)
     print(int_prop)
