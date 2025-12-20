@@ -1,4 +1,4 @@
 from Config import *
-from Element import *
-from Group import *
-from Property import *
+from Element import Element, ElementInterface
+from Group import Group
+from Property import Property, IntProperty, FloatProperty

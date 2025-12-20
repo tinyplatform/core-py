@@ -1,6 +1,8 @@
 from typing import Any
-from Element import Element
+from Element import Element, ElementInterface
 from Group import Group
+
+from json import dumps
 
 class Property(Element):
     """Base class for all configuration properties.
@@ -35,9 +37,32 @@ class Property(Element):
     @property
     def optional(self) -> bool:
         return self._optional
+    
+    @optional.setter
+    def optional(self, optional: bool):
+        self._optional = optional
+
+    @property
+    def parent(self):
+        return self._parent
+    
+    @parent.setter
+    def parent(self, parent: ElementInterface|None):
+        if parent is not None and not isinstance(parent, Group):
+            raise TypeError(self, parent)
+
+        self._parent = parent
+        if isinstance(parent, Group):
+            parent.add_child(self)
 
     def __str__(self) -> str:
         return f'{self.__class__.__name__}<{self._value_type.__name__}> {self.name}({repr(self.value)})'
+
+    def dump(self) -> Any:
+        return self.value
+
+    def serialize(self) -> str:
+        return dumps(self._value)
 
 class IntProperty(Property):
     """A configuration property that stores an integer."""
@@ -173,3 +198,10 @@ if __name__ == '__main__':
         print(float_prop)
     except Exception as e:
         print(e.__class__.__name__, e)
+
+    print(repr(float_prop.serialize()))
+    print(group.serialize())
+
+    super_group = Group(None, "superGroup")
+    group.parent = super_group
+    print(super_group.serialize())

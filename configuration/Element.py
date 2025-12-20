@@ -1,10 +1,14 @@
+from typing import Any
+
 class ElementInterface:
     def full_path(self) -> str: ...
+    def dump(self) -> Any: ...
+    def serialize(self) -> str: ...
 
 class Element(ElementInterface):
     def __init__(self, parent: ElementInterface|None, name: str):
-        self._parent = parent
-        self._name = name
+        self.parent = parent
+        self.name = name
 
     @property
     def parent(self):
