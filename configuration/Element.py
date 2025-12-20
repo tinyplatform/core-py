@@ -2,9 +2,6 @@ class ElementInterface:
     def full_path(self) -> str: ...
 
 class Element(ElementInterface):
-    _parent: ElementInterface|None
-    _name: str
-
     def __init__(self, parent: ElementInterface|None, name: str):
         self._parent = parent
         self._name = name
@@ -30,3 +27,8 @@ class Element(ElementInterface):
             raise TypeError(self, name)
     
         self._name = name
+
+    def full_path(self) -> str:
+        if self._parent is None:
+            return self._name
+        return f'{self._parent.full_path()}/{self._name}'
