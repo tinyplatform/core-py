@@ -1,6 +1,6 @@
 from Application import *
 
-from PySide6.QtWidgets import QWidget
+from PySide6.QtWidgets import QWidget, QMainWindow
 
 class TestApp(Application):
     app_ID = 'test'
@@ -11,10 +11,11 @@ class TestApp(Application):
         print('NEW APP INSTANCE')
         print(self.app_ID, self.configuration_version, self.app_version)
 
+        self.mainWindow = QMainWindow()
+        self.menu = self.mainWindow.menuBar()
+        self.menu.addMenu('&File')
+
+        self.mainWindow.show()
+
 app = TestApp()
-
-window = QWidget()
-window.show()
-
-app.aboutQt()
 exit(app.exec())
