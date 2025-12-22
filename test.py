@@ -1,5 +1,6 @@
 from Application import *
 
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QWidget, QMainWindow
 
 class TestApp(Application):
@@ -12,8 +13,8 @@ class TestApp(Application):
         print(self.app_ID, self.configuration_version, self.app_version)
 
         self.mainWindow = QMainWindow()
-        self.menu = self.mainWindow.menuBar()
-        self.menu.addMenu('&File')
+        menuBar = self.mainWindow.menuBar()
+        file = menuBar.addMenu("&File")
 
         self.mainWindow.show()
 
