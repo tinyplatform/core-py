@@ -1,6 +1,6 @@
 from typing import Any
-from Element import Element, ElementInterface
-from Group import Group
+from .Element import Element, ElementInterface
+from .Group import Group
 
 from json import dumps
 

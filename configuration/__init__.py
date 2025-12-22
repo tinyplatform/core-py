@@ -1,7 +1,7 @@
-from Config import *
-from Element import Element, ElementInterface
-from Group import Group
-from Property import Property, IntProperty, FloatProperty
+from .Config import *
+from .Element import Element, ElementInterface
+from .Group import Group
+from .Property import Property, IntProperty, FloatProperty
 
 if __name__ == '__main__':
     group = Group(None, "propGroup")

@@ -1,7 +1,7 @@
 from typing import Any, Callable
-from Element import Element, CompositeInterface
-from Group import Group
-from Property import Property
+from .Element import Element, CompositeInterface
+from .Group import Group
+from .Property import Property
 from json import dumps
 
 class Config(CompositeInterface):

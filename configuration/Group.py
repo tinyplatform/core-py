@@ -1,5 +1,5 @@
 from typing import Any, Callable
-from Element import Element, ElementInterface, CompositeInterface
+from .Element import Element, ElementInterface, CompositeInterface
 from json import dumps
 
 class Group(Element, CompositeInterface):
