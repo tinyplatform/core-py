@@ -1,6 +1,6 @@
 import shlex
-from Group import Group
-from Property import *
+from .Group import Group
+from .Property import *
 
 BLOCK_WORDS = ('version', 'group')
 
